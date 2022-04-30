@@ -1,0 +1,49 @@
+appId: com.electron.app
+productName: EvPlayer
+copyright: Copyright © 2022 alex.wei
+directories:
+  buildResources: build
+files:
+  - '!**/.vscode/*'
+  - '!**/src/*'
+  - '!**/electron.vite.config.{js,ts,mjs,cjs}'
+  - '!**/{.eslintignore,.eslintrc.js,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+asarUnpack:
+  - '**/*.{node,dll}'
+  - 'resources/**'
+afterSign: build/notarize.js
+fileAssociations:
+    ext:
+      - mp4
+      - ogg
+      - webm
+    name: video
+    role: Editor
+win:
+  executableName: evplayer
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: always
+mac:
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    - NSCameraUsageDescription: Application requests access to the device's camera.
+    - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
+    - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
+    - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
+dmg:
+  artifactName: ${name}-${version}.${ext}
+linux:
+  target:
+    - AppImage
+    - deb
+  maintainer: alex.wei
+  category: Utility
+appImage:
+  artifactName: ${name}-${version}.${ext}
+npmRebuild: false
+publish:
+  provider: generic
+  url: https://example.com/auto-updates

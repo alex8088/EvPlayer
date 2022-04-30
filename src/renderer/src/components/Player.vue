@@ -1,0 +1,70 @@
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import videojs from 'video.js'
+
+import { VideoFile, VideoInfo } from '../../../common/types'
+import { getVideoInfoList } from '../utils/video'
+
+const playerRef = ref<HTMLVideoElement>()
+const player = ref<videojs.Player>()
+const currentVideo = ref<VideoInfo | null>()
+
+const play = (video: VideoInfo): void => {
+  if (currentVideo.value?.path !== video.path) {
+    currentVideo.value = video
+    if (video) player.value?.src(`file:///${video.path}`)
+  }
+}
+
+const handleDrop = async (e: DragEvent): Promise<void> => {
+  e.preventDefault()
+
+  let files: VideoFile[] = []
+  if (e.dataTransfer) {
+    for (const f of e.dataTransfer.files) {
+      if (f.type.startsWith('video')) {
+        files.push({
+          path: f.path,
+          name: f.name
+        })
+      }
+    }
+  }
+
+  const videoInfoList = await getVideoInfoList(files)
+  window.electron.ipcRenderer.send('ev:add-videos', videoInfoList)
+}
+
+onMounted(() => {
+  if (playerRef.value) {
+    player.value = videojs(playerRef.value, {
+      controls: true,
+      autoplay: true,
+      fill: true
+    })
+  }
+})
+
+onUnmounted(() => {
+  if (player.value) player.value.dispose()
+})
+
+defineExpose({
+  play
+})
+</script>
+
+<template>
+  <div class="player" @drop="handleDrop" @dragenter.prevent @dragover.prevent>
+    <video ref="playerRef" class="video-js"></video>
+  </div>
+</template>
+
+<style>
+@import 'video.js/dist/video-js.css';
+@import '../assets/css/player.css';
+
+.player {
+  flex: 1;
+}
+</style>
