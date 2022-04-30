@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="180" src="./build/icon.png" alt="EvPlayer logo">
+  <img width="180" src="https://alex8088.github.io/assets/evplayer-logo.png" alt="EvPlayer logo">
 </p>
 <br/>
 <p align="center">
@@ -31,7 +31,7 @@
 
 ## Download
 
-You can download from [Release](https://github.com/alex8088/electron-vite/releases) page
+You can download from [Release](https://github.com/alex8088/EvPlayer/releases) page
 
 ## Screenshots
 
