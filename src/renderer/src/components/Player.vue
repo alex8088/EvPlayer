@@ -2,8 +2,10 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import videojs from 'video.js'
 
-import { VideoFile, VideoInfo } from '../../../common/types'
 import { getVideoInfoList } from '../utils/video'
+
+import { VideoFile, VideoInfo } from '../../../common/types'
+import { IpcEvents } from '../../../common/ipcEvents'
 
 const playerRef = ref<HTMLVideoElement>()
 const player = ref<videojs.Player>()
@@ -36,7 +38,7 @@ const handleDrop = async (e: DragEvent): Promise<void> => {
   }
 
   const videoInfoList = await getVideoInfoList(files)
-  window.electron.ipcRenderer.send('ev:add-videos', videoInfoList)
+  window.electron.ipcRenderer.send(IpcEvents.EV_ADD_VIDEOS, videoInfoList)
 }
 
 onMounted(() => {

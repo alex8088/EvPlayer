@@ -2,9 +2,9 @@
 import type { IpcRendererEvent, IpcRenderer } from '@electron-toolkit/preload'
 import { onUnmounted } from 'vue'
 
-type IpcRendererListener = (event: IpcRendererEvent, ...args: any[]) => void
+import { IpcEvents } from '../../../common/ipcEvents'
 
-type IpcEvents = 'win:max-reply' | 'ev:add-videos' | 'ev:play-videos' | 'ev:pause'
+type IpcRendererListener = (event: IpcRendererEvent, ...args: any[]) => void
 
 export default function useIpcRendererOn(
   channel: IpcEvents,

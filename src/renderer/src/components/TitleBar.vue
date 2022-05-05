@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import useIpcRendererOn from '../hook/useIpcRendererOn'
+import { IpcEvents } from '../../../common/ipcEvents'
 
 defineProps({
   title: String
@@ -16,14 +17,14 @@ const emit = defineEmits<{
 const maximize = ref(false)
 
 const handleClick = (action: 'min' | 'max' | 'close'): void => {
-  window.electron.ipcRenderer.send('win:invoke', action)
+  window.electron.ipcRenderer.send(IpcEvents.WIN_INVOKE, action)
 }
 
 const openVideo = (): void => {
-  window.electron.ipcRenderer.send('ev:show-open-dialog')
+  window.electron.ipcRenderer.send(IpcEvents.EV_SHOW_OPEN_DIALOG)
 }
 
-useIpcRendererOn('win:max-reply', (_, arg: boolean) => {
+useIpcRendererOn(IpcEvents.WIN_MAX_REPLY, (_, arg: boolean) => {
   maximize.value = arg
 })
 </script>

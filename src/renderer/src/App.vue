@@ -7,6 +7,7 @@ import useIpcRendererOn from './hook/useIpcRendererOn'
 import { getVideoInfoList } from './utils/video'
 
 import { VideoFile, VideoInfo } from '../../common/types'
+import { IpcEvents } from '../../common/ipcEvents'
 
 const player = ref<InstanceType<typeof Player> | null>(null)
 const playlist = ref<InstanceType<typeof Playlist> | null>(null)
@@ -21,12 +22,12 @@ const playVideo = (video: VideoInfo): void => {
   player.value?.play(video)
 }
 
-useIpcRendererOn('ev:play-videos', async (_, videos: VideoFile[]) => {
+useIpcRendererOn(IpcEvents.EV_PLAY, async (_, videos: VideoFile[]) => {
   const videoInfoList = await getVideoInfoList(videos)
-  window.electron.ipcRenderer.send('ev:add-videos', videoInfoList)
+  window.electron.ipcRenderer.send(IpcEvents.EV_ADD_VIDEOS, videoInfoList)
 })
 
-useIpcRendererOn('ev:pause', () => {
+useIpcRendererOn(IpcEvents.EV_PAUSE, () => {
   player.value?.pause()
 })
 </script>

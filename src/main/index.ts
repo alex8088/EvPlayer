@@ -5,6 +5,8 @@ import { electronApp, optimizer, is, platform } from '@electron-toolkit/utils'
 import { getVideoFromPath } from './utils'
 import ipc from './ipc'
 
+import { IpcEvents } from '../common/ipcEvents'
+
 let mainWindow: BrowserWindow | null
 
 function createWindow(): void {
@@ -42,15 +44,15 @@ function createWindow(): void {
   })
 
   mainWindow.on('minimize', () => {
-    mainWindow?.webContents.send('ev:pause', true)
+    sendIPC(IpcEvents.EV_PAUSE)
   })
 
   mainWindow.on('maximize', () => {
-    mainWindow?.webContents.send('win:max-reply', true)
+    sendIPC(IpcEvents.WIN_MAX_REPLY, true)
   })
 
   mainWindow.on('unmaximize', () => {
-    mainWindow?.webContents.send('win:max-reply', false)
+    sendIPC(IpcEvents.WIN_MAX_REPLY, false)
   })
 
   mainWindow.on('close', () => {
@@ -64,6 +66,10 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'))
   }
+}
+
+function sendIPC(channel: IpcEvents, ...args): void {
+  mainWindow?.webContents.send(channel, args)
 }
 
 function initApp(): void {
@@ -147,7 +153,7 @@ function playVideo(args?: string[]): void {
   const path = resolveOpenedPathFromArgs(args)
   if (path) {
     const video = getVideoFromPath(path)
-    if (video) mainWindow?.webContents.send('ev:play-videos', [video])
+    if (video) sendIPC(IpcEvents.EV_PLAY, [video])
   }
 }
 

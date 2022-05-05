@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import useIpcRendererOn from '../hook/useIpcRendererOn'
 import { VideoInfo } from '../../../common/types'
+import { IpcEvents } from '../../../common/ipcEvents'
 
 import OverlayScrollbars from '@codeporter/overlayscrollbars-vue'
 import 'overlayscrollbars/css/OverlayScrollbars.css'
@@ -14,7 +15,7 @@ const emit = defineEmits<{
   (e: 'click', video: VideoInfo): void
 }>()
 
-useIpcRendererOn('ev:add-videos', (_, videos: VideoInfo[]) => {
+useIpcRendererOn(IpcEvents.EV_ADD_VIDEOS, (_, videos: VideoInfo[]) => {
   const video = videos[0]
   current.value = video?.path
   list.value = videos
@@ -22,7 +23,7 @@ useIpcRendererOn('ev:add-videos', (_, videos: VideoInfo[]) => {
 })
 
 onMounted(() => {
-  window.electron.ipcRenderer.invoke('ev:get-playlist').then((videos: VideoInfo[]) => {
+  window.electron.ipcRenderer.invoke(IpcEvents.EV_GET_PLAYLIST).then((videos: VideoInfo[]) => {
     list.value = videos
   })
 })

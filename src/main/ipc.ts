@@ -4,9 +4,10 @@ import { saveBase64Image } from './fs'
 import { setWindowJumpList, setMacOSRecentDocuments } from './history'
 import { getVideoFromPath, getVideoExtensions } from './utils'
 import { VideoFile, VideoInfo } from '../common/types'
+import { IpcEvents } from '../common/ipcEvents'
 
 const register = (): void => {
-  ipcMain.on('ev:show-open-dialog', async (e) => {
+  ipcMain.on(IpcEvents.EV_SHOW_OPEN_DIALOG, async (e) => {
     const win = BrowserWindow.fromWebContents(e.sender)
     win!.focus()
     dialog
@@ -22,12 +23,12 @@ const register = (): void => {
             const file = getVideoFromPath(p)
             if (file) videoFiles.push(file)
           })
-          e.sender.send('ev:play-videos', videoFiles)
+          e.sender.send(IpcEvents.EV_PLAY, videoFiles)
         }
       })
   })
 
-  ipcMain.on('ev:add-videos', (e, videos: VideoInfo[]) => {
+  ipcMain.on(IpcEvents.EV_ADD_VIDEOS, (e, videos: VideoInfo[]) => {
     const paths = videos.map((v) => v.path)
     let list = store.get('playlist')
     list = list.filter((v) => !paths.includes(v.path))
@@ -44,10 +45,10 @@ const register = (): void => {
     setWindowJumpList(list)
     setMacOSRecentDocuments(list)
 
-    e.reply('ev:add-videos', list)
+    e.reply(IpcEvents.EV_ADD_VIDEOS, list)
   })
 
-  ipcMain.handle('ev:get-playlist', () => {
+  ipcMain.handle(IpcEvents.EV_GET_PLAYLIST, () => {
     return store.get('playlist')
   })
 }
