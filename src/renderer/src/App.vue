@@ -25,6 +25,10 @@ useIpcRendererOn('ev:play-videos', async (_, videos: VideoFile[]) => {
   const videoInfoList = await getVideoInfoList(videos)
   window.electron.ipcRenderer.send('ev:add-videos', videoInfoList)
 })
+
+useIpcRendererOn('ev:pause', () => {
+  player.value?.pause()
+})
 </script>
 
 <template>

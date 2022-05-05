@@ -4,7 +4,7 @@ import { onUnmounted } from 'vue'
 
 type IpcRendererListener = (event: IpcRendererEvent, ...args: any[]) => void
 
-type IpcEvents = 'win:max-reply' | 'ev:add-videos' | 'ev:play-videos'
+type IpcEvents = 'win:max-reply' | 'ev:add-videos' | 'ev:play-videos' | 'ev:pause'
 
 export default function useIpcRendererOn(
   channel: IpcEvents,

@@ -41,6 +41,10 @@ function createWindow(): void {
     playVideo()
   })
 
+  mainWindow.on('minimize', () => {
+    mainWindow?.webContents.send('ev:pause', true)
+  })
+
   mainWindow.on('maximize', () => {
     mainWindow?.webContents.send('win:max-reply', true)
   })

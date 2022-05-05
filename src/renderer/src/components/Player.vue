@@ -16,6 +16,10 @@ const play = (video: VideoInfo): void => {
   }
 }
 
+const pause = (): void => {
+  player.value?.pause()
+}
+
 const handleDrop = async (e: DragEvent): Promise<void> => {
   e.preventDefault()
 
@@ -50,7 +54,8 @@ onUnmounted(() => {
 })
 
 defineExpose({
-  play
+  play,
+  pause
 })
 </script>
 
