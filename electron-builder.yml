@@ -13,12 +13,12 @@ asarUnpack:
   - 'resources/**'
 afterSign: build/notarize.js
 fileAssociations:
-    ext:
-      - mp4
-      - ogg
-      - webm
-    name: video
-    role: Editor
+  ext:
+    - mp4
+    - ogg
+    - webm
+  name: video
+  role: Editor
 win:
   executableName: evplayer
 nsis:
