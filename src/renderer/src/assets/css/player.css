@@ -26,24 +26,22 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+.video-js .vjs-button > .vjs-icon-placeholder:before {
+  font-size: 2.5em;
+}
+
 .video-js .vjs-control-bar {
   height: 4em;
   background-color: rgba(0, 0, 0, 0.8);
-}
-
-.video-js .vjs-button > .vjs-icon-placeholder:before {
-  line-height: 2.3;
+  user-select: none;
 }
 
 .video-js .vjs-time-control {
+  display: block;
   line-height: 4em;
 }
 
-.video-js .vjs-picture-in-picture-control {
-  display: none;
-}
-
-.video-js .vjs-volume-panel.vjs-hover .vjs-volume-control.vjs-volume-horizontal,
+/* .video-js .vjs-volume-panel.vjs-hover .vjs-volume-control.vjs-volume-horizontal,
 .video-js .vjs-volume-panel:active .vjs-volume-control.vjs-volume-horizontal,
 .video-js .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-horizontal,
 .video-js .vjs-volume-panel .vjs-volume-control:active.vjs-volume-horizontal,
@@ -54,6 +52,10 @@
 
 .video-js .vjs-volume-bar {
   margin: 1.85em auto;
+} */
+
+.video-js .vjs-volume-control.vjs-volume-vertical {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .video-js .vjs-volume-control:hover .vjs-volume-tooltip {
@@ -77,7 +79,14 @@
   font-size: 1.5em;
 }
 
-.video-js .vjs-remaining-time span {
+.video-js .vjs-play-progress.vjs-slider-bar .vjs-time-tooltip {
+  display: none;
+}
+
+.video-js .vjs-current-time-display,
+.video-js .vjs-duration-display {
   font-size: 14px;
-  padding-right: 2px;
+  display: flex;
+  justify-content: center;
+  min-width: 44px;
 }

@@ -46,7 +46,18 @@ onMounted(() => {
     player.value = videojs(playerRef.value, {
       controls: true,
       autoplay: true,
-      fill: true
+      fill: true,
+      controlBar: {
+        volumePanel: { inline: false, volumeControl: { vertical: true } },
+        children: [
+          'playToggle',
+          'volumePanel',
+          'currentTimeDisplay',
+          'progressControl',
+          'durationDisplay',
+          'fullscreenToggle'
+        ]
+      }
     })
   }
 })
