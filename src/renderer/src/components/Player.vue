@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import videojs from 'video.js'
 
 import { getVideoInfoList } from '../utils/video'
+import Keyboard from '../utils/keyboard'
 
 import { VideoFile, VideoInfo } from '../../../common/types'
 import { IpcEvents } from '../../../common/ipcEvents'
@@ -57,8 +58,17 @@ onMounted(() => {
           'durationDisplay',
           'fullscreenToggle'
         ]
+      },
+      userActions: {
+        hotkeys: function (event): void {
+          if (player.value) {
+            Keyboard.handlerKeyCode(player.value, event.keyCode)
+          }
+        }
       }
     })
+    const keyboard = new Keyboard(player.value)
+    keyboard.bind()
   }
 })
 
