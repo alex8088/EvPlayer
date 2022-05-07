@@ -18,7 +18,7 @@
 - [x] Simple and no ads
 - [x] Video thumbnails
 - [x] Playback history
-- [ ] Keyboard shortcut controls
+- [x] Keyboard shortcut controls
 - [ ] Remember playback progress
 - [ ] Screenshot
 - [ ] AVI, MKV and more format support
@@ -36,6 +36,18 @@ You can download from [Release](https://github.com/alex8088/EvPlayer/releases) p
 ## Screenshots
 
 ![screenshot](https://alex8088.github.io/assets/evplayer-screenshot.png)
+
+## Shortcuts
+
+|   Shortcut   | Description         |
+| :----------- | :------------------ |
+| `Space`      | Play or Pause       |
+| `→`          | Forward 5 seconds   |
+| `←`          | Rewind 5 seconds    |
+| `↑`          | Volume up           |
+| `↓`          | Volume down         |
+| `m`          | Muted or not        |
+| `f` or `F11` | Fullscreen or not   |
 
 ## Develop
 
