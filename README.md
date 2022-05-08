@@ -35,7 +35,7 @@ You can download from [Release](https://github.com/alex8088/EvPlayer/releases) p
 
 ## Screenshots
 
-![screenshot](https://alex8088.github.io/assets/evplayer-screenshot.png)
+![screenshot](https://alex8088.github.io/assets/evplayer-screenshot.png?x)
 
 ## Shortcuts
 
