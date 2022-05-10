@@ -38,8 +38,10 @@ const handleDrop = async (e: DragEvent): Promise<void> => {
     }
   }
 
-  const videoInfoList = await getVideoInfoList(files)
-  window.electron.ipcRenderer.send(IpcEvents.EV_ADD_VIDEOS, videoInfoList)
+  if (files.length) {
+    const videoInfoList = await getVideoInfoList(files)
+    window.electron.ipcRenderer.send(IpcEvents.EV_ADD_VIDEOS, videoInfoList)
+  }
 }
 
 onMounted(() => {
