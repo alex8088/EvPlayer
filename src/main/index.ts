@@ -2,6 +2,8 @@ import { app, BrowserWindow, Menu } from 'electron'
 import path from 'path'
 import { electronApp, optimizer, is, platform } from '@electron-toolkit/utils'
 
+import icon from '../../resources/icons/icon.png?asset'
+
 import { getVideoFromPath } from './utils'
 import ipc from './ipc'
 
@@ -24,11 +26,7 @@ function createWindow(): void {
       y: 8
     },
     autoHideMenuBar: true,
-    ...(platform.isLinux
-      ? {
-          icon: path.join(__dirname, '../../resources/icons/icon.png')
-        }
-      : {}),
+    ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
       webSecurity: false,
