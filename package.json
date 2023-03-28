@@ -38,7 +38,7 @@
     "@types/node": "^16.18.21",
     "@types/overlayscrollbars": "^1.12.1",
     "@types/video.js": "^7.3.51",
-    "@vitejs/plugin-vue": "^3.2.0",
+    "@vitejs/plugin-vue": "^4.1.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.2",
     "electron": "^21.2.3",
