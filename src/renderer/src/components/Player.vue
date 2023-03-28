@@ -26,7 +26,7 @@ const pause = (): void => {
 const handleDrop = async (e: DragEvent): Promise<void> => {
   e.preventDefault()
 
-  let files: VideoFile[] = []
+  const files: VideoFile[] = []
   if (e.dataTransfer) {
     for (const f of e.dataTransfer.files) {
       if (f.type.startsWith('video')) {
