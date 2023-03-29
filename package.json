@@ -23,7 +23,7 @@
     "postinstall": "electron-builder install-app-deps",
     "build:win": "npm run build && electron-builder --win --config",
     "build:mac": "npm run build && electron-builder --mac --config",
-    "build:linux": "npm run build && electron-builder --linux --config"
+    "build:linux": "npm run build && electron-builder --linux --config electron-builder-linux.yml"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^1.0.3",
