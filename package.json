@@ -1,7 +1,7 @@
 {
   "name": "evplayer",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Video player base on Electron",
   "main": "./out/main/index.js",
   "author": "alex.wei",
